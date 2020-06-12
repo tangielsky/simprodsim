@@ -1,5 +1,4 @@
-# simprodsim
-Simple Production Simulation
+#Simple Production Simulation
 ============================
 My goals for this project is to find out if it's possible to code a simple simulation of production processes.
 And help with this to answers questions to optimize productions.

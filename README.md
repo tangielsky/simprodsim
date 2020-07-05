@@ -4,6 +4,9 @@ My goals for this project is to find out if it's possible to code a simple simul
 And help with this to answers questions to optimize productions.
 
 You'll find some more details on the projects webseite:
+- English: 
+https://techpluscode.de/simprodsim-en
+- German: 
 https://techpluscode.de/simprodsim
 
 

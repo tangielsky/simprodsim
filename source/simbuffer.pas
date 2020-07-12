@@ -6,9 +6,12 @@ interface
 
 uses
   Classes, SysUtils, Controls, StdCtrls, ComCtrls, Dialogs,
-  SimOrder;
+  SimOrder, SimObjects;
 
 type
+
+  { TSimulationBuffer }
+
   TSimulationBuffer = class
   private
     FList : TList;
@@ -17,10 +20,13 @@ type
     FResultAmountMax : longint;
     FResultOrdersMax : longint;
     FView : TWinControl;
+
     procedure SetMaxOrders(AValue: longint);
     procedure SetView(AValue: TWinControl);
 
   public
+    SimDataBufferOrders : TSimulationData;
+
     constructor Create;
     destructor Destroy;
     function FindByOrderId(OrderId: string): boolean;
@@ -31,7 +37,9 @@ type
     function ForwardOrder(Index : integer): TOrder;
     function GetOrder(Index : integer) : TOrder;
     procedure AddOrder(Order : TOrder);
+    procedure Reset;
     procedure UpdateView;
+
   published
     property Orders : TList read FList write FList;
     property MaxOrders : longint read FMaxOrders write SetMaxOrders;
@@ -44,7 +52,7 @@ type
 
 implementation
 
-uses SimObjects,SimTime,SimController;
+uses SimTime,SimController;
 
 
 procedure TSimulationBuffer.SetView(AValue: TWinControl);
@@ -65,6 +73,8 @@ constructor TSimulationBuffer.Create;
 begin
   inherited Create;
 
+  SimDataBufferOrders:=TSimulationData.Create;
+
   FList:=TList.Create;
   FMaxOrders:=-1; //endless buffer
   FMinStayInTime:=0;
@@ -75,6 +85,7 @@ end;
 
 destructor TSimulationBuffer.Destroy;
 begin
+  SimDataBufferOrders.Free;
   FList.Free;
   inherited Destroy;
 end;
@@ -108,6 +119,9 @@ var
 
 begin
   if FView=nil then exit;
+
+  SimDataBufferOrders.AddValue(FList.Count);
+
   if FView is TListview then
     begin
 
@@ -255,7 +269,14 @@ begin
   a:=Amount;
   if a>FResultAmountMax then FResultAmountMax:=a;
   if FList.Count>FResultOrdersMax then FResultOrdersMax:=FList.Count;
+
   UpdateView;
+end;
+
+procedure TSimulationBuffer.Reset;
+begin
+  SimDataBufferOrders.Reset;
+  FList.Clear;
 end;
 
 

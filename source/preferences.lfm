@@ -1,40 +1,39 @@
 object PreferencesForm: TPreferencesForm
-  Left = 838
-  Height = 628
-  Top = 167
-  Width = 856
+  Left = 806
+  Height = 502
+  Top = 323
+  Width = 685
   Caption = 'Preferences'
-  ClientHeight = 628
-  ClientWidth = 856
-  DesignTimePPI = 120
+  ClientHeight = 502
+  ClientWidth = 685
   LCLVersion = '2.0.8.0'
   object Panel1: TPanel
     Left = 0
-    Height = 58
-    Top = 570
-    Width = 856
+    Height = 46
+    Top = 456
+    Width = 685
     Align = alBottom
     BevelOuter = bvNone
-    ClientHeight = 58
-    ClientWidth = 856
+    ClientHeight = 46
+    ClientWidth = 685
     ParentFont = False
     TabOrder = 0
     object Panel2: TPanel
-      Left = 592
-      Height = 58
+      Left = 474
+      Height = 46
       Top = 0
-      Width = 264
+      Width = 211
       Align = alRight
       BevelOuter = bvNone
-      ClientHeight = 58
-      ClientWidth = 264
+      ClientHeight = 46
+      ClientWidth = 211
       ParentFont = False
       TabOrder = 0
       object Button1: TButton
         Left = 0
-        Height = 39
+        Height = 31
         Top = 0
-        Width = 118
+        Width = 94
         Caption = 'Ok'
         Default = True
         ModalResult = 1
@@ -42,10 +41,10 @@ object PreferencesForm: TPreferencesForm
         TabOrder = 0
       end
       object Button2: TButton
-        Left = 130
-        Height = 39
+        Left = 104
+        Height = 31
         Top = 0
-        Width = 118
+        Width = 94
         Cancel = True
         Caption = 'Cancel'
         ParentFont = False
@@ -53,148 +52,148 @@ object PreferencesForm: TPreferencesForm
       end
     end
     object Label11: TLabel
-      Left = 40
-      Height = 20
-      Top = 15
-      Width = 266
+      Left = 32
+      Height = 15
+      Top = 12
+      Width = 213
       Caption = 'Changes will not be saved in this version'
       ParentColor = False
+      ParentFont = False
     end
   end
   object Panel3: TPanel
     Left = 0
-    Height = 570
+    Height = 456
     Top = 0
-    Width = 856
+    Width = 685
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 10
-    ClientHeight = 570
-    ClientWidth = 856
+    ClientHeight = 456
+    ClientWidth = 685
     ParentFont = False
     TabOrder = 1
     object PageControl1: TPageControl
       Left = 10
-      Height = 550
+      Height = 436
       Top = 10
-      Width = 836
-      ActivePage = TabSheet1
+      Width = 665
+      ActivePage = TabSheet3
       Align = alClient
       ParentFont = False
-      TabIndex = 0
+      TabIndex = 2
       TabOrder = 0
       object TabSheet1: TTabSheet
         Caption = 'General'
-        ClientHeight = 517
-        ClientWidth = 828
+        ClientHeight = 408
+        ClientWidth = 657
         ParentFont = False
         object Label4: TLabel
-          Left = 20
-          Height = 20
-          Top = 129
-          Width = 111
+          Left = 16
+          Height = 15
+          Top = 200
+          Width = 89
           Caption = 'Workcenter state'
-          Font.Style = [fsUnderline]
           ParentColor = False
           ParentFont = False
         end
         object Label5: TLabel
-          Left = 160
-          Height = 20
-          Top = 136
-          Width = 28
+          Left = 144
+          Height = 15
+          Top = 206
+          Width = 22
           Caption = 'wait'
           ParentColor = False
           ParentFont = False
         end
         object Label6: TLabel
-          Left = 160
-          Height = 20
-          Top = 178
-          Width = 36
+          Left = 144
+          Height = 15
+          Top = 239
+          Width = 29
           Caption = 'setup'
           ParentColor = False
           ParentFont = False
         end
         object Label7: TLabel
-          Left = 160
-          Height = 20
-          Top = 221
-          Width = 50
+          Left = 144
+          Height = 15
+          Top = 274
+          Width = 40
           Caption = 'process'
           ParentColor = False
           ParentFont = False
         end
         object ColorButtonProcessB: TColorButton
-          Left = 250
-          Height = 39
-          Top = 214
-          Width = 118
+          Left = 200
+          Height = 31
+          Top = 268
+          Width = 94
           BorderWidth = 2
           ButtonColorSize = 16
           ButtonColor = clLime
           ParentFont = False
         end
         object ColorButtonSetupB: TColorButton
-          Left = 250
-          Height = 39
-          Top = 171
-          Width = 118
+          Left = 200
+          Height = 31
+          Top = 234
+          Width = 94
           BorderWidth = 2
           ButtonColorSize = 16
           ButtonColor = clBlue
           ParentFont = False
         end
         object ColorButtonWaitB: TColorButton
-          Left = 250
-          Height = 39
-          Top = 129
-          Width = 118
+          Left = 200
+          Height = 31
+          Top = 200
+          Width = 94
           BorderWidth = 2
           ButtonColorSize = 16
           ButtonColor = clSilver
           ParentFont = False
         end
-        object ColorButtonDesktop: TColorButton
-          Left = 250
-          Height = 39
-          Top = 20
-          Width = 118
+        object ColorButtonBackground: TColorButton
+          Left = 200
+          Height = 31
+          Top = 16
+          Width = 94
           BorderWidth = 2
           ButtonColorSize = 16
           ButtonColor = clWhite
           ParentFont = False
         end
         object Label3: TLabel
-          Left = 20
-          Height = 20
-          Top = 29
-          Width = 117
+          Left = 16
+          Height = 15
+          Top = 23
+          Width = 94
           Caption = 'Background color'
           ParentColor = False
           ParentFont = False
         end
         object Label8: TLabel
-          Left = 20
-          Height = 20
-          Top = 71
-          Width = 125
+          Left = 16
+          Height = 15
+          Top = 80
+          Width = 100
           Caption = 'Background image'
           ParentColor = False
           ParentFont = False
         end
         object FileNameEditBackground: TFileNameEdit
-          Left = 250
-          Height = 28
-          Top = 71
-          Width = 549
+          Left = 200
+          Height = 23
+          Top = 80
+          Width = 434
           DialogTitle = 'Open background image'
           Filter = 'Image files (*.jpg; *.png; *.bmp)|*.jpg;*.png;*.bmp'
           FilterIndex = 0
           DefaultExt = '.jpg'
           HideDirectories = False
           ButtonHint = 'browse image '
-          ButtonWidth = 36
+          ButtonWidth = 29
           NumGlyphs = 1
           Anchors = [akTop, akLeft, akRight]
           MaxLength = 0
@@ -202,64 +201,100 @@ object PreferencesForm: TPreferencesForm
           TabOrder = 0
         end
         object ColorButtonProcessF: TColorButton
-          Left = 376
-          Height = 39
-          Top = 214
-          Width = 118
+          Left = 301
+          Height = 31
+          Top = 268
+          Width = 94
           BorderWidth = 2
           ButtonColorSize = 16
           ButtonColor = clBlack
           ParentFont = False
         end
         object ColorButtonSetupF: TColorButton
-          Left = 376
-          Height = 39
-          Top = 171
-          Width = 118
+          Left = 301
+          Height = 31
+          Top = 234
+          Width = 94
           BorderWidth = 2
           ButtonColorSize = 16
           ButtonColor = clWhite
           ParentFont = False
         end
         object ColorButtonWaitF: TColorButton
-          Left = 376
-          Height = 39
-          Top = 129
-          Width = 118
+          Left = 301
+          Height = 31
+          Top = 200
+          Width = 94
           BorderWidth = 2
           ButtonColorSize = 16
           ButtonColor = clBlack
           ParentFont = False
         end
         object Label9: TLabel
-          Left = 520
-          Height = 20
-          Top = 136
-          Width = 260
+          Left = 416
+          Height = 15
+          Top = 206
+          Width = 206
           Caption = 'background and textcolor of each state'
+          ParentColor = False
+          ParentFont = False
+        end
+        object SpinEditBackgroundWidth: TSpinEdit
+          Left = 200
+          Height = 23
+          Top = 112
+          Width = 58
+          MaxValue = 2000
+          ParentFont = False
+          TabOrder = 1
+        end
+        object Label12: TLabel
+          Left = 144
+          Height = 15
+          Top = 112
+          Width = 30
+          Caption = 'width'
+          ParentColor = False
+          ParentFont = False
+        end
+        object SpinEditBackgroundHeight: TSpinEdit
+          Left = 200
+          Height = 23
+          Top = 140
+          Width = 58
+          MaxValue = 2000
+          ParentFont = False
+          TabOrder = 2
+        end
+        object Label13: TLabel
+          Left = 144
+          Height = 15
+          Top = 140
+          Width = 34
+          Caption = 'height'
           ParentColor = False
           ParentFont = False
         end
       end
       object TabSheet2: TTabSheet
         Caption = 'Database'
-        ClientHeight = 517
-        ClientWidth = 828
+        ClientHeight = 408
+        ClientWidth = 657
         ParentFont = False
         object Label1: TLabel
-          Left = 20
-          Height = 20
-          Top = 30
-          Width = 151
+          Left = 16
+          Height = 15
+          Top = 24
+          Width = 118
           Caption = 'ODBC Database Name'
           ParentColor = False
           ParentFont = False
         end
         object EditOdbcName: TEdit
-          Left = 250
-          Height = 28
-          Top = 30
-          Width = 549
+          Left = 200
+          Height = 23
+          Top = 24
+          Width = 434
           Anchors = [akTop, akLeft, akRight]
           ParentFont = False
           TabOrder = 0
@@ -268,23 +303,23 @@ object PreferencesForm: TPreferencesForm
       end
       object TabSheet3: TTabSheet
         Caption = 'Simulation'
-        ClientHeight = 517
-        ClientWidth = 828
+        ClientHeight = 408
+        ClientWidth = 657
         ParentFont = False
         object Label2: TLabel
-          Left = 20
-          Height = 20
-          Top = 30
-          Width = 144
+          Left = 16
+          Height = 15
+          Top = 24
+          Width = 114
           Caption = 'Time interval per step'
           ParentColor = False
           ParentFont = False
         end
         object SpinEditInterval: TSpinEdit
-          Left = 250
-          Height = 28
-          Top = 30
-          Width = 120
+          Left = 200
+          Height = 23
+          Top = 24
+          Width = 96
           MaxValue = 1000
           MinValue = 1
           ParentFont = False
@@ -292,10 +327,10 @@ object PreferencesForm: TPreferencesForm
           Value = 1
         end
         object Label10: TLabel
-          Left = 416
-          Height = 60
-          Top = 30
-          Width = 336
+          Left = 333
+          Height = 48
+          Top = 24
+          Width = 269
           AutoSize = False
           Caption = 'values greater than 1 will force faster simulation, but results will be more imprecise '
           ParentColor = False

@@ -15,7 +15,7 @@ type
   TPreferencesForm = class(TForm)
     Button1: TButton;
     Button2: TButton;
-    ColorButtonDesktop: TColorButton;
+    ColorButtonBackground: TColorButton;
     ColorButtonWaitB: TColorButton;
     ColorButtonSetupB: TColorButton;
     ColorButtonProcessB: TColorButton;
@@ -27,6 +27,8 @@ type
     Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -39,6 +41,8 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
+    SpinEditBackgroundWidth: TSpinEdit;
+    SpinEditBackgroundHeight: TSpinEdit;
     SpinEditInterval: TSpinEdit;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;

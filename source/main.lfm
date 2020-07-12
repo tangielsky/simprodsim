@@ -1,11 +1,11 @@
 object MainForm: TMainForm
-  Left = 657
+  Left = 883
   Height = 744
-  Top = 140
-  Width = 1157
-  Caption = 'Simple Production Simulation (version 0.1 BETA)'
+  Top = 166
+  Width = 1158
+  Caption = 'Simple Production Simulation (version 0.2 BETA)'
   ClientHeight = 719
-  ClientWidth = 1157
+  ClientWidth = 1158
   DesignTimePPI = 120
   Font.CharSet = ANSI_CHARSET
   Font.Color = clBlack
@@ -14,6 +14,7 @@ object MainForm: TMainForm
   Font.Pitch = fpVariable
   Font.Quality = fqDraft
   Menu = MainMenu1
+  OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
@@ -22,16 +23,23 @@ object MainForm: TMainForm
     Left = 0
     Height = 72
     Top = 0
-    Width = 1157
+    Width = 1158
     Align = alTop
     BevelInner = bvRaised
     BevelOuter = bvNone
     BorderWidth = 2
     ClientHeight = 72
-    ClientWidth = 1157
+    ClientWidth = 1158
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
     TabOrder = 0
     object Panel6: TPanel
-      Left = 253
+      Left = 251
       Height = 66
       Top = 3
       Width = 154
@@ -39,6 +47,13 @@ object MainForm: TMainForm
       BevelOuter = bvNone
       ClientHeight = 66
       ClientWidth = 154
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 0
       object TrackBar1: TTrackBar
         Left = 8
@@ -83,6 +98,13 @@ object MainForm: TMainForm
       BevelOuter = bvNone
       ClientHeight = 66
       ClientWidth = 119
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 1
       object SpeedButton3: TSpeedButton
         Left = 0
@@ -92,7 +114,14 @@ object MainForm: TMainForm
         Action = ActionLoadState
         Align = alLeft
         Flat = True
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         ShowCaption = False
+        ParentFont = False
       end
       object SpeedButton4: TSpeedButton
         Left = 40
@@ -102,7 +131,14 @@ object MainForm: TMainForm
         Action = ActionSaveState
         Align = alLeft
         Flat = True
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         ShowCaption = False
+        ParentFont = False
       end
       object SpeedButton5: TSpeedButton
         Left = 80
@@ -112,7 +148,14 @@ object MainForm: TMainForm
         Action = ActionPreferences
         Align = alLeft
         Flat = True
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         ShowCaption = False
+        ParentFont = False
       end
       object Panel4: TPanel
         Left = 0
@@ -134,7 +177,7 @@ object MainForm: TMainForm
       end
     end
     object Panel8: TPanel
-      Left = 410
+      Left = 407
       Height = 66
       Top = 3
       Width = 158
@@ -142,6 +185,13 @@ object MainForm: TMainForm
       BevelOuter = bvNone
       ClientHeight = 66
       ClientWidth = 158
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 2
       object LabelTime: TLabel
         Left = 10
@@ -149,7 +199,14 @@ object MainForm: TMainForm
         Top = 16
         Width = 126
         Caption = '00 d 00 h 00 min 00 s'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         ParentColor = False
+        ParentFont = False
       end
       object Panel15: TPanel
         Left = 0
@@ -171,7 +228,7 @@ object MainForm: TMainForm
       end
     end
     object Panel9: TPanel
-      Left = 732
+      Left = 727
       Height = 66
       Top = 3
       Width = 179
@@ -179,6 +236,13 @@ object MainForm: TMainForm
       BevelOuter = bvNone
       ClientHeight = 66
       ClientWidth = 179
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 3
       object PanelInfoWork: TPanel
         Left = 1
@@ -188,6 +252,13 @@ object MainForm: TMainForm
         BevelInner = bvLowered
         BevelOuter = bvNone
         Caption = 'Work'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        ParentFont = False
         TabOrder = 0
       end
       object PanelInfoWait: TPanel
@@ -198,6 +269,13 @@ object MainForm: TMainForm
         BevelInner = bvLowered
         BevelOuter = bvNone
         Caption = 'Wait'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        ParentFont = False
         TabOrder = 1
       end
       object PanelInfoSetup: TPanel
@@ -208,6 +286,13 @@ object MainForm: TMainForm
         BevelInner = bvLowered
         BevelOuter = bvNone
         Caption = 'Setup'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        ParentFont = False
         TabOrder = 2
       end
       object Panel17: TPanel
@@ -230,7 +315,7 @@ object MainForm: TMainForm
       end
     end
     object Panel10: TPanel
-      Left = 571
+      Left = 567
       Height = 66
       Top = 3
       Width = 158
@@ -238,6 +323,13 @@ object MainForm: TMainForm
       BevelOuter = bvNone
       ClientHeight = 66
       ClientWidth = 158
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 4
       object LabelRealTime: TLabel
         Left = 10
@@ -245,7 +337,14 @@ object MainForm: TMainForm
         Top = 16
         Width = 126
         Caption = '00 d 00 h 00 min 00 s'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         ParentColor = False
+        ParentFont = False
       end
       object Panel16: TPanel
         Left = 0
@@ -267,7 +366,7 @@ object MainForm: TMainForm
       end
     end
     object Panel12: TPanel
-      Left = 125
+      Left = 124
       Height = 66
       Top = 3
       Width = 125
@@ -275,6 +374,13 @@ object MainForm: TMainForm
       BevelOuter = bvNone
       ClientHeight = 66
       ClientWidth = 125
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 5
       object SpeedButton6: TSpeedButton
         Left = 0
@@ -284,7 +390,14 @@ object MainForm: TMainForm
         Action = ActionSimReset
         Align = alLeft
         Flat = True
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         ShowCaption = False
+        ParentFont = False
       end
       object SpeedButtonStart: TSpeedButton
         Left = 40
@@ -294,7 +407,14 @@ object MainForm: TMainForm
         Action = ActionSimStart
         Align = alLeft
         Flat = True
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         ShowCaption = False
+        ParentFont = False
       end
       object SpeedButton8: TSpeedButton
         Left = 80
@@ -304,7 +424,14 @@ object MainForm: TMainForm
         Action = ActionSimStep
         Align = alLeft
         Flat = True
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         ShowCaption = False
+        ParentFont = False
       end
       object Panel13: TPanel
         Left = 0
@@ -329,55 +456,90 @@ object MainForm: TMainForm
       Left = 122
       Height = 66
       Top = 3
-      Width = 3
+      Width = 2
       Align = alLeft
       BevelInner = bvRaised
       BevelOuter = bvNone
       BorderWidth = 2
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 6
     end
     object Panel19: TPanel
-      Left = 250
+      Left = 249
       Height = 66
       Top = 3
-      Width = 3
+      Width = 2
       Align = alLeft
       BevelInner = bvRaised
       BevelOuter = bvNone
       BorderWidth = 2
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 7
     end
     object Panel20: TPanel
-      Left = 407
+      Left = 405
       Height = 66
       Top = 3
-      Width = 3
+      Width = 2
       Align = alLeft
       BevelInner = bvRaised
       BevelOuter = bvNone
       BorderWidth = 2
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 8
     end
     object Panel21: TPanel
-      Left = 729
+      Left = 725
       Height = 66
       Top = 3
-      Width = 3
+      Width = 2
       Align = alLeft
       BevelInner = bvRaised
       BevelOuter = bvNone
       BorderWidth = 2
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 9
     end
     object Panel22: TPanel
-      Left = 568
+      Left = 565
       Height = 66
       Top = 3
-      Width = 3
+      Width = 2
       Align = alLeft
       BevelInner = bvRaised
       BevelOuter = bvNone
       BorderWidth = 2
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 10
     end
   end
@@ -390,8 +552,15 @@ object MainForm: TMainForm
     BevelOuter = bvNone
     ClientHeight = 647
     ClientWidth = 262
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
     TabOrder = 1
-    object Panel2: TPanel
+    object PanelSource: TPanel
       Left = 0
       Height = 279
       Top = 0
@@ -399,6 +568,13 @@ object MainForm: TMainForm
       Align = alTop
       ClientHeight = 279
       ClientWidth = 262
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 0
       object Label2: TLabel
         Left = 1
@@ -442,7 +618,14 @@ object MainForm: TMainForm
             Caption = 'Amount'
             Width = 73
           end>
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         GridLines = True
+        ParentFont = False
         ReadOnly = True
         SmallImages = ImageList16
         TabOrder = 0
@@ -467,6 +650,13 @@ object MainForm: TMainForm
       BevelOuter = bvNone
       ClientHeight = 152
       ClientWidth = 262
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 2
       object Label3: TLabel
         Left = 0
@@ -513,14 +703,21 @@ object MainForm: TMainForm
           item
             Caption = 'Leadtime'
           end>
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         GridLines = True
+        ParentFont = False
         ReadOnly = True
         SmallImages = ImageList16
         TabOrder = 0
         ViewStyle = vsReport
       end
     end
-    object Panel11: TPanel
+    object PanelWip: TPanel
       Left = 0
       Height = 200
       Top = 287
@@ -529,6 +726,13 @@ object MainForm: TMainForm
       BevelOuter = bvNone
       ClientHeight = 200
       ClientWidth = 262
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
       TabOrder = 3
       object Label8: TLabel
         Left = 0
@@ -575,7 +779,14 @@ object MainForm: TMainForm
             Caption = 'Workcenter'
             Width = 96
           end>
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         GridLines = True
+        ParentFont = False
         ReadOnly = True
         SmallImages = ImageList16
         TabOrder = 0
@@ -596,24 +807,38 @@ object MainForm: TMainForm
     Left = 268
     Height = 647
     Top = 72
-    Width = 621
+    Width = 624
     Align = alClient
     ClientHeight = 647
-    ClientWidth = 621
+    ClientWidth = 624
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
     TabOrder = 2
     object ScrollBox1: TScrollBox
       Left = 1
       Height = 645
       Top = 1
-      Width = 619
+      Width = 622
       HorzScrollBar.Page = 161
       VertScrollBar.Page = 160
       Align = alClient
       BorderStyle = bsNone
       ClientHeight = 645
-      ClientWidth = 619
+      ClientWidth = 622
       Color = clWhite
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
       ParentColor = False
+      ParentFont = False
       TabOrder = 0
       object ImageBackground: TImage
         Left = 0
@@ -632,31 +857,46 @@ object MainForm: TMainForm
     Width = 6
   end
   object PanelRight: TPanel
-    Left = 895
+    Left = 898
     Height = 647
     Top = 72
-    Width = 262
+    Width = 260
     Align = alRight
     BevelOuter = bvNone
     ClientHeight = 647
-    ClientWidth = 262
+    ClientWidth = 260
     Color = clActiveBorder
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
     TabOrder = 4
     object Panel3: TPanel
       Left = 0
       Height = 647
       Top = 0
-      Width = 262
+      Width = 260
       Align = alClient
       ClientHeight = 647
-      ClientWidth = 262
+      ClientWidth = 260
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
       TabOrder = 0
       object Label6: TLabel
         Left = 1
         Height = 17
         Top = 1
-        Width = 260
+        Width = 258
         Align = alTop
         Alignment = taCenter
         Caption = 'Object'
@@ -673,9 +913,9 @@ object MainForm: TMainForm
       end
       object ListViewObject: TListView
         Left = 1
-        Height = 628
-        Top = 18
-        Width = 260
+        Height = 430
+        Top = 58
+        Width = 258
         Align = alClient
         BorderStyle = bsNone
         Columns = <        
@@ -689,15 +929,124 @@ object MainForm: TMainForm
             Caption = 'Value'
             Width = 57
           end>
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         GridLines = True
+        ParentFont = False
         ReadOnly = True
         TabOrder = 0
         ViewStyle = vsReport
       end
+      object PanelChart: TPanel
+        Left = 1
+        Height = 150
+        Top = 496
+        Width = 258
+        Align = alBottom
+        ClientHeight = 150
+        ClientWidth = 258
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        ParentFont = False
+        TabOrder = 1
+        object ComboboxChart: TComboBox
+          Left = 1
+          Height = 25
+          Top = 1
+          Width = 256
+          Align = alTop
+          Font.CharSet = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Pitch = fpVariable
+          Font.Quality = fqDraft
+          ItemHeight = 17
+          ItemIndex = 0
+          Items.Strings = (
+            'State'
+            'Inputbuffer'
+            'Outputbuffer'
+          )
+          OnChange = ComboboxChartChange
+          ParentFont = False
+          Style = csDropDownList
+          TabOrder = 0
+          Text = 'State'
+        end
+      end
+      object Splitter6: TSplitter
+        Cursor = crVSplit
+        Left = 1
+        Height = 8
+        Top = 488
+        Width = 258
+        Align = alBottom
+        ResizeAnchor = akBottom
+      end
+      object Panel23: TPanel
+        Left = 1
+        Height = 40
+        Top = 18
+        Width = 258
+        Align = alTop
+        BevelOuter = bvNone
+        ClientHeight = 40
+        ClientWidth = 258
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        ParentFont = False
+        TabOrder = 3
+        object SpeedButton1: TSpeedButton
+          Left = 0
+          Height = 40
+          Top = 0
+          Width = 40
+          Action = ActionObjectUpdate
+          Align = alLeft
+          Flat = True
+          Font.CharSet = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Pitch = fpVariable
+          Font.Quality = fqDraft
+          ShowCaption = False
+          ParentFont = False
+        end
+        object CheckBoxAutoUpdate: TCheckBox
+          Left = 40
+          Height = 40
+          Top = 0
+          Width = 99
+          Align = alLeft
+          Caption = 'Auto-Update'
+          Font.CharSet = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Pitch = fpVariable
+          Font.Quality = fqDraft
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
     end
   end
   object Splitter4: TSplitter
-    Left = 889
+    Left = 892
     Height = 647
     Top = 72
     Width = 6
@@ -707,7 +1056,7 @@ object MainForm: TMainForm
   object ODBCConnection1: TODBCConnection
     Connected = False
     LoginPrompt = True
-    DatabaseName = 'ProductionSimulation'
+    DatabaseName = 'SimProdSim'
     KeepConnection = True
     Params.Strings = (
       'DBQ='
@@ -716,7 +1065,7 @@ object MainForm: TMainForm
     Transaction = SQLTransaction1
     LogEvents = []
     Driver = 'Microsoft Access Driver (*.mdb)'
-    FileDSN = 'ProductionSimulation'
+    FileDSN = 'SimProdSim'
     left = 340
     top = 230
   end
@@ -959,6 +1308,7 @@ object MainForm: TMainForm
     object ActionSaveState: TAction
       Caption = 'Save current state'
       ImageIndex = 1
+      OnExecute = ActionSaveStateExecute
     end
     object ActionLoadState: TAction
       Caption = 'Load state...'
@@ -974,18 +1324,24 @@ object MainForm: TMainForm
       Caption = 'About...'
       OnExecute = ActionAboutExecute
     end
+    object ActionObjectUpdate: TAction
+      Category = 'Object'
+      Caption = 'Update'
+      ImageIndex = 3
+      OnExecute = ActionObjectUpdateExecute
+    end
   end
   object Timer2: TTimer
     Enabled = False
     OnTimer = Timer2Timer
-    left = 457
+    left = 458
     top = 131
   end
   object ImageList32: TImageList
     Height = 32
     Width = 32
     left = 150
-    top = 192
+    top = 193
     Bitmap = {
       4C690700000020000000200000005B5B5B005B5B5B005B5B5B005B5B5B005B5B
       5B005B5B5B005B5B5B005B5B5B005B5B5B005B5B5B005B5B5B005B5B5B005B5B
@@ -1885,5 +2241,20 @@ object MainForm: TMainForm
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00
     }
+  end
+  object SQLQuery2: TSQLQuery
+    PacketRecords = 1
+    FieldDefs = <>
+    Database = ODBCConnection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      ''
+    )
+    DeleteSQL.Strings = (
+      'DELETE * FROM Results_Workcenters'
+    )
+    Params = <>
+    left = 360
+    top = 420
   end
 end

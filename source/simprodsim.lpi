@@ -20,7 +20,7 @@
     </i18n>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <MinorVersionNr Value="1"/>
+      <MinorVersionNr Value="2"/>
       <Attributes pvaPreRelease="True"/>
       <StringTable CompanyName="techpluscode.de" FileDescription="Simulation of production flow" InternalName="SimProdSim" LegalCopyright="2020 by techpluscode.de" OriginalFilename="simprodsim.exe" ProductName="Simple Production Simulation"/>
     </VersionInfo>

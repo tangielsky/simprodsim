@@ -126,7 +126,8 @@ begin
       if FTime>FSetuptime then
         begin
           SetOrderState(osInProcess);
-          FAmountFinished:=Round((FTime-FSetuptime)/FProcesstime);
+          if FProcesstime=0 then FAmountFinished:=0
+          else FAmountFinished:=Round((FTime-FSetuptime)/FProcesstime);
         end;
     end
   else

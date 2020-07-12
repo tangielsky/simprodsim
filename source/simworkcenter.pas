@@ -29,8 +29,11 @@ type
       FState : TWorkcenterStateDef;
       FView : TWinControl;
       FWaittime : TSimulationTime;
+      FOnSelect : TNotifyEvent;
+
 
       RelPosX,RelPosY: Integer;
+
 
       //Form elements
       LabelId : TLabel;
@@ -53,6 +56,8 @@ type
       procedure SetView(AValue: TWinControl);
     public
       SimPieChartState : TSimPieChart;
+      SimDataState : TSimulationData;
+
       constructor Create(TheOwner: TComponent); override;
       destructor Destroy;
       procedure DoNextStep;
@@ -74,6 +79,8 @@ type
       property State : TWorkcenterStateDef read FState write SetState;
       property View : TWinControl read FView write SetView;
       property Waittime : TSimulationTime read FWaittime;
+      property OnSelect: TNotifyEvent read FOnSelect write FOnSelect;
+
   end;
 
   TWorkcenterList = class(TList)
@@ -132,11 +139,18 @@ begin
 end;
 
 procedure TWorkcenter.SetState(AValue: TWorkcenterStateDef);
-var wsp : TWorkcenterStateProps;
+var
+  wsp : TWorkcenterStateProps;
+  i : integer;
 begin
   if FState=AValue then exit;
 
   FState:=AValue;
+
+  if FState=wcsSetup then i:=1
+  else if FState=wcsProcess then i:=2
+  else i:=0;
+  SimDataState.AddValue(i);
 
   wsp:=GetWorkcenterStateProps(FState);
   LabelId.Font.Color:=wsp.Forecolor;
@@ -185,6 +199,7 @@ var x,y,a : integer;
     l.Transparent:=transparent;
     l.ParentFont:=true;
     l.Font.Bold:=bold;
+    l.Cursor:=crHandPoint;
     InsertControl(l);
   end;
   procedure CreateLabel2(s : string; x,y : integer);
@@ -210,6 +225,8 @@ var x,y,a : integer;
 
 begin
   inherited Create(TheOwner);
+
+  SimDataState:=TSimulationData.Create;
 
   FInputBuffer:=TSimulationBuffer.Create;
   FOutputBuffer:=TSimulationBuffer.Create;
@@ -294,6 +311,8 @@ end;
 
 destructor TWorkcenter.Destroy;
 begin
+  SimDataState.Free;
+
   InputBuffer.Free;
   OutputBuffer.Free;
 
@@ -307,6 +326,8 @@ end;
 procedure TWorkcenter.HeadMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
+  if Assigned(FOnSelect) then FOnSelect(Self);
+
   RelPosX:=X; RelPosY:=Y;
   UpdateView;
 end;
@@ -408,6 +429,9 @@ end;
 procedure TWorkcenter.Reset;
 begin
   SetActiveOrder(nil);
+  FInputBuffer.Reset;
+  FOutputBuffer.Reset;
+  SimDataState.Reset;
 end;
 
 

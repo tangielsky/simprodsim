@@ -128,10 +128,10 @@ begin
                     end;
                 end;
             end;
-        end
+        end;
 
         //ist outputbuffer =0, then check if input is free
-        else if (Workcenter.OutputBuffer.MaxOrders=0) and (Workcenter.ActiveOrder<>nil) and (Workcenter.State=wcsWait) then
+        if (Workcenter.OutputBuffer.MaxOrders=0) and (Workcenter.ActiveOrder<>nil) and (Workcenter.State=wcsWait) then
           begin
             OrderItem:=Workcenter.ActiveOrder.GetNextOrderItem;
             if OrderItem=nil then NextWorkcenter:=nil
@@ -154,8 +154,8 @@ begin
                       NextWorkcenter.ActiveOrder:=Workcenter.ForwardOrder;
                   end;
               end;
-           end
-        else if (Workcenter.InputBuffer.IsFree)
+           end;
+        if (Workcenter.InputBuffer.IsFree)
               or ((Workcenter.InputBuffer.MaxOrders=0) and (Workcenter.ActiveOrder=nil)) then
                 //get an order from source?
               begin

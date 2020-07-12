@@ -4,8 +4,15 @@ SimProdSim - Simple Production Simulation
 A simple simulation of production processes
 Uses Microsoft Access database connected via ODBC
 
+
+EN:
+https://techpluscode.de/simprodsim-en/
+https://techpluscode.de/production-simulation-with-self-coded-software/
+
+DE:
 https://techpluscode.de/simprodsim/
 https://techpluscode.de/eigene-simulation-von-produktionsprozessen
+
 
 (C) 2020 Thomas Angielsky
 
@@ -13,6 +20,9 @@ https://techpluscode.de/eigene-simulation-von-produktionsprozessen
 Version 0.1: first version of the app
              not all functions are implemented, this is a proof of concept
              more information on
+
+Version 0.2: load and save of preferences
+             visualization of buffers and state via TSimXYChart component
 
 }
 
@@ -25,13 +35,15 @@ interface
 uses
   Classes, SysUtils, odbcconn, sqldb, db, FileUtil, Forms, Controls, Graphics,
   Dialogs, ExtCtrls, StdCtrls, Menus, ActnList, ValEdit, ComCtrls, Buttons, LCLIntf,
+  Inifiles,
 
   SimController,
   SimWorkcenter,
   SimOrder,
   SimArticle,
   SimSource,
-  SimSink;
+  SimSink,
+  SimXYChart;
 
 
 type
@@ -39,6 +51,7 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    ActionObjectUpdate: TAction;
     ActionAbout: TAction;
     ActionSimStep: TAction;
     ActionLoadState: TAction;
@@ -49,6 +62,8 @@ type
     ActionSimReset: TAction;
     ActionPreferences: TAction;
     ActionList1: TActionList;
+    CheckBoxAutoUpdate: TCheckBox;
+    ComboboxChart: TComboBox;
     Datasource1: TDataSource;
     ImageBackground: TImage;
     ImageList32: TImageList;
@@ -82,7 +97,7 @@ type
     ODBCConnection1: TODBCConnection;
     Panel1: TPanel;
     Panel10: TPanel;
-    Panel11: TPanel;
+    PanelWip: TPanel;
     Panel12: TPanel;
     Panel13: TPanel;
     Panel14: TPanel;
@@ -94,6 +109,8 @@ type
     Panel20: TPanel;
     Panel21: TPanel;
     Panel22: TPanel;
+    Panel23: TPanel;
+    PanelChart: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
     PanelInfoWork: TPanel;
@@ -102,13 +119,14 @@ type
     PanelLeft: TPanel;
     PanelRight: TPanel;
     PanelSimulation: TPanel;
-    Panel2: TPanel;
+    PanelSource: TPanel;
     Panel5: TPanel;
     Panel6: TPanel;
     Panel7: TPanel;
     Panel8: TPanel;
     Panel9: TPanel;
     ScrollBox1: TScrollBox;
+    SpeedButton1: TSpeedButton;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
     SpeedButton5: TSpeedButton;
@@ -119,18 +137,24 @@ type
     Splitter2: TSplitter;
     Splitter3: TSplitter;
     Splitter4: TSplitter;
+    Splitter6: TSplitter;
     SQLQuery1: TSQLQuery;
+    SQLQuery2: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
     Timer1: TTimer;
     Timer2: TTimer;
     TrackBar1: TTrackBar;
     procedure ActionAboutExecute(Sender: TObject);
     procedure ActionCloseExecute(Sender: TObject);
+    procedure ActionObjectUpdateExecute(Sender: TObject);
     procedure ActionPreferencesExecute(Sender: TObject);
+    procedure ActionSaveStateExecute(Sender: TObject);
     procedure ActionSimResetExecute(Sender: TObject);
     procedure ActionSimStartExecute(Sender: TObject);
     procedure ActionSimStepExecute(Sender: TObject);
     procedure ActionWebExecute(Sender: TObject);
+    procedure ComboboxChartChange(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -142,10 +166,16 @@ type
     SimulationSink : TSimulationSink;
     RealTime : longint;
     FirstStart : boolean;
+    SimXYChartObject : TSimXYChart;
+    SelectedWorkcenter : TWorkcenter;
+    procedure LoadPreferences;
+    procedure SavePreferences;
     procedure ApplyPreferences;
     procedure DoNextStep(updatetime: boolean);
     procedure OpenQuery(Query: TSQLQuery; SQL: string);
+    procedure ExecQuery(Query: TSQLQuery; SQL: string);
     procedure SetSimulationActive(state: boolean);
+    procedure WorkcenterSelected(Sender: TObject);
     { private declarations }
   public
     { public declarations }
@@ -162,8 +192,25 @@ uses SimObjects, SimTime, Preferences;
 
 
 procedure TMainForm.FormCreate(Sender: TObject);
+var
+  Ini : TInifile;
+  s : string;
 begin
   FirstStart:=true;
+
+  (*
+  try
+    Ini:=TInifile.Create(ExtractFilePath(Paramstr(0))+PathDelim+'simprodsim.ini');
+    s:='App internal';
+    PanelLeft.Width:=Ini.ReadInteger(s,'Left panel',260);
+    PanelRight.Width:=Ini.ReadInteger(s,'Right panel',260);
+    PanelSource.Height:=Ini.ReadInteger(s,'Source height',260);
+    PanelWip.Height:=Ini.ReadInteger(s,'WIP height',260);
+    PanelChart.Height:=Ini.ReadInteger(s,'Chart height',150);
+  finally
+    Ini.Free;
+  end;
+    *)
 
   TrackBar1.Position:=1;
   TrackBar1Change(Sender);
@@ -178,7 +225,43 @@ begin
 
   SimulationController.ViewWip:=ListViewWip;
 
+  SimXYChartObject:=TSimXYChart.Create(self);
+  SimXYChartObject.Align:=alClient;
+  PanelChart.InsertControl(SimXYChartObject);
+
 end;
+
+procedure TMainForm.FormShow(Sender: TObject);
+begin
+  if FirstStart then
+    begin
+      FirstStart:=false;
+      LoadPreferences;
+      ApplyPreferences;
+      ActionSimResetExecute(Sender);
+    end;
+end;
+
+procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+var
+  Ini : TInifile;
+  s : string;
+begin
+  try
+    Ini:=TInifile.Create(ExtractFilePath(Paramstr(0))+PathDelim+'simprodsim.ini');
+    s:='App internal';
+    Ini.WriteInteger(s,'Left panel',PanelLeft.Width);
+    Ini.WriteInteger(s,'Right panel',PanelRight.Width);
+    Ini.WriteInteger(s,'Source height',PanelSource.Height);
+    Ini.WriteInteger(s,'WIP height',PanelWip.Height);
+    Ini.WriteInteger(s,'Chart height',PanelChart.Height);
+
+  finally
+    Ini.Free;
+  end;
+end;
+
+
 
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
@@ -188,15 +271,102 @@ begin
 
   SimulationSink.Free;
   SimulationSource.Free;
+
+  SimXYChartObject.Free;
+
 end;
 
-procedure TMainForm.FormShow(Sender: TObject);
+
+
+procedure TMainForm.OpenQuery(Query : TSQLQuery; SQL : string);
 begin
-  if FirstStart then
-    begin
-      FirstStart:=false;
-      ApplyPreferences;
-    end;
+  Query.Active:=false;
+  Query.SQL.Text:=SQL;
+  try
+    Query.Open;
+  except
+    MessageDlg('Error on opening query:'+#13#10+SQL,mtWarning,[mbOK],0);
+  end;
+end;
+
+procedure TMainForm.ExecQuery(Query: TSQLQuery; SQL: string);
+begin
+  Query.Active:=false;
+  Query.SQL.Text:=SQL;
+  try
+    Query.ExecSQL;
+    Query.Active:=false;
+  except
+    MessageDlg('Error on opening query:'+#13#10+SQL,mtWarning,[mbOK],0);
+  end;
+end;
+
+
+procedure TMainForm.LoadPreferences;
+var
+  Ini : TInifile;
+  s : string;
+begin
+  try
+    Ini:=TInifile.Create(ExtractFilePath(Paramstr(0))+PathDelim+'simprodsim.ini');
+    s:='Database';
+    PreferencesForm.EditOdbcName.Text:=Ini.ReadString(s,'ODBC DSN','SimProdSim');
+
+    s:='Desktop';
+    PreferencesForm.FileNameEditBackground.Text:=Ini.ReadString(s,'Background image','');
+    PreferencesForm.SpinEditBackgroundWidth.Value:=Ini.ReadInteger(s,'Background image width',0);
+    PreferencesForm.SpinEditBackgroundHeight.Value:=Ini.ReadInteger(s,'Background image height',0);
+    PreferencesForm.ColorButtonBackground.ButtonColor:=StringToColor(Ini.ReadString(s,'Background color',ColorToString(clWhite)));
+
+    s:='Simulation';
+    PreferencesForm.ColorButtonProcessB.ButtonColor:=StringToColor(Ini.ReadString(s,'Process background color',ColorToString(clGreen)));
+    PreferencesForm.ColorButtonProcessF.ButtonColor:=StringToColor(Ini.ReadString(s,'Process text color',ColorToString(clBlack)));
+    PreferencesForm.ColorButtonSetupB.ButtonColor:=StringToColor(Ini.ReadString(s,'Setup background color',ColorToString(clNavy)));
+    PreferencesForm.ColorButtonSetupF.ButtonColor:=StringToColor(Ini.ReadString(s,'Setup text color',ColorToString(clWhite)));
+    PreferencesForm.ColorButtonWaitB.ButtonColor:=StringToColor(Ini.ReadString(s,'Wait background color',ColorToString(clGray)));
+    PreferencesForm.ColorButtonWaitF.ButtonColor:=StringToColor(Ini.ReadString(s,'Wait text color',ColorToString(clBlack)));
+    PreferencesForm.SpinEditInterval.Value:=Ini.ReadInteger(s,'Time interval',1);
+
+    s:='App internal';
+    PanelLeft.Width:=Ini.ReadInteger(s,'Left panel',260);
+    PanelRight.Width:=Ini.ReadInteger(s,'Right panel',260);
+    PanelSource.Height:=Ini.ReadInteger(s,'Source height',260);
+    PanelWip.Height:=Ini.ReadInteger(s,'WIP height',260);
+    PanelChart.Height:=Ini.ReadInteger(s,'Chart height',150);
+
+  finally
+    Ini.Free;
+  end;
+end;
+
+procedure TMainForm.SavePreferences;
+var
+  Ini : TInifile;
+  s : string;
+begin
+  try
+    Ini:=TInifile.Create(ExtractFilePath(Paramstr(0))+PathDelim+'simprodsim.ini');
+    s:='Database';
+    Ini.WriteString(s,'ODBC DSN',PreferencesForm.EditOdbcName.Text);
+
+    s:='Desktop';
+    Ini.WriteString(s,'Background image',PreferencesForm.FileNameEditBackground.Text);
+    Ini.WriteInteger(s,'Background image width',PreferencesForm.SpinEditBackgroundWidth.Value);
+    Ini.WriteInteger(s,'Background image height',PreferencesForm.SpinEditBackgroundHeight.Value);
+    Ini.WriteString(s,'Background color',ColorToString(PreferencesForm.ColorButtonBackground.ButtonColor));
+
+    s:='Simulation';
+    Ini.WriteString(s,'Process background color',ColorToString(PreferencesForm.ColorButtonProcessB.ButtonColor));
+    Ini.WriteString(s,'Process text color',ColorToString(PreferencesForm.ColorButtonProcessF.ButtonColor));
+    Ini.WriteString(s,'Setup background color',ColorToString(PreferencesForm.ColorButtonSetupB.ButtonColor));
+    Ini.WriteString(s,'Setup text color',ColorToString(PreferencesForm.ColorButtonSetupF.ButtonColor));
+    Ini.WriteString(s,'Wait background color',ColorToString(PreferencesForm.ColorButtonWaitB.ButtonColor));
+    Ini.WriteString(s,'Wait text color',ColorToString(PreferencesForm.ColorButtonWaitF.ButtonColor));
+    Ini.WriteInteger(s,'Time interval',PreferencesForm.SpinEditInterval.Value);
+
+  finally
+    Ini.Free;
+  end;
 end;
 
 procedure TMainForm.ApplyPreferences;
@@ -222,7 +392,7 @@ begin
   PanelInfoWait.Font.Color:=WorkcenterStateWait.Forecolor;
   PanelInfoWait.Color:=WorkcenterStateWait.Backcolor;
 
-  Scrollbox1.Color:=PreferencesForm.ColorButtonDesktop.ButtonColor;
+  Scrollbox1.Color:=PreferencesForm.ColorButtonBackground.ButtonColor;
 
   SimulationController.TimeInterval:=PreferencesForm.SpinEditInterval.Value;
 end;
@@ -246,6 +416,14 @@ begin
   SpeedButtonStart.ImageIndex:=ActionSimStart.ImageIndex;
 end;
 
+procedure TMainForm.WorkcenterSelected(Sender: TObject);
+begin
+  if Sender=nil then exit;
+
+  SelectedWorkcenter:=(Sender as TWorkcenter);
+  ComboboxChartChange(Sender);
+end;
+
 procedure TMainForm.Timer1Timer(Sender: TObject);
 begin
   DoNextStep(false);
@@ -255,6 +433,9 @@ procedure TMainForm.Timer2Timer(Sender: TObject);
 begin
   RealTime:=RealTime+1;
   LabelRealTime.Caption:=TSimulationTime.FormatHM(RealTime);
+
+  if CheckBoxAutoUpdate.Checked then
+    ActionObjectUpdateExecute(Sender);
 end;
 
 procedure TMainForm.DoNextStep(updatetime : boolean);
@@ -272,9 +453,19 @@ begin
   Timer1.Interval:=TrackBar1.Position*5;
 end;
 
+
 procedure TMainForm.ActionCloseExecute(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TMainForm.ActionObjectUpdateExecute(Sender: TObject);
+begin
+  if SelectedWorkcenter=nil then exit;
+
+  SelectedWorkcenter.UpdateView;
+  ComboboxChartChange(Sender);
+  SimXYChartObject.Repaint;
 end;
 
 procedure TMainForm.ActionAboutExecute(Sender: TObject);
@@ -289,7 +480,28 @@ end;
 procedure TMainForm.ActionPreferencesExecute(Sender: TObject);
 begin
   if PreferencesForm.ShowModal=mrOk then
-    ApplyPreferences;
+    begin
+      SavePreferences;
+      ApplyPreferences;
+    end;
+end;
+
+procedure TMainForm.ActionSaveStateExecute(Sender: TObject);
+var
+  i : integer;
+  Workcenter : TWorkcenter;
+begin
+  //Is at the moment used for writing out data of buffers
+  for i:=0 to WorkcenterList.Count-1 do
+    begin
+      Workcenter:=TWorkcenter(WorkcenterList[i]);
+      Workcenter.SimDataState.SaveToFile(Workcenter.Id+'-state.txt');
+      if Workcenter.InputBuffer.MaxOrders<>0 then
+        Workcenter.InputBuffer.SimDataBufferOrders.SaveToFile(Workcenter.Id+'-input.txt');
+      if Workcenter.OutputBuffer.MaxOrders<>0 then
+        Workcenter.OutputBuffer.SimDataBufferOrders.SaveToFile(Workcenter.Id+'-output.txt');
+    end;
+
 end;
 
 procedure TMainForm.ActionSimResetExecute(Sender: TObject);
@@ -349,6 +561,7 @@ begin
       Workcenter.Top:=10+y;
       Workcenter.State:=wcsSetup;
       Workcenter.State:=wcsWait;
+      Workcenter.OnSelect:=@WorkcenterSelected;
       Scrollbox1.InsertControl(Workcenter);
       x:=x+Workcenter.Width+10;
       if x>Scrollbox1.Width then
@@ -433,15 +646,15 @@ begin
   OpenURL('https://techpluscode.de/simprodsim');
 end;
 
-procedure TMainForm.OpenQuery(Query : TSQLQuery; SQL : string);
+procedure TMainForm.ComboboxChartChange(Sender: TObject);
 begin
-  Query.Active:=false;
-  Query.SQL.Text:=SQL;
-  try
-    Query.Open;
-  except
-    MessageDlg('Error on opening query:'+#13#10+SQL,mtWarning,[mbOK],0);
-  end;
+  if SelectedWorkcenter=nil then exit;
+
+  if ComboboxChart.ItemIndex=1 then
+    SimXYChartObject.Values:=SelectedWorkcenter.InputBuffer.SimDataBufferOrders
+  else if ComboboxChart.ItemIndex=2 then
+    SimXYChartObject.Values:=SelectedWorkcenter.OutputBuffer.SimDataBufferOrders
+  else SimXYChartObject.Values:=SelectedWorkcenter.SimDataState;
 end;
 
 

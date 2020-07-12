@@ -16,3 +16,13 @@ The project is coded with Lazarus (2.0.8) and uses a Mircosoft Access database (
 
 Preview of a simulation:
 https://techpluscode.de/wp-content/uploads/2020/06/SimProdSim.mp4
+
+-----------------------------------------
+> Version 0.1:<br> 
+- First version
+           
+> Version 0.2: <br>
+- added chart component and visualization of buffers and state<br>
+- load and save of preferences<br>
+  ![Screenshot](https://techpluscode.de/wp-content/uploads/2020/07/sim-news-version-0.2.jpg)
+       
